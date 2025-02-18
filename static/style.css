@@ -1,0 +1,33 @@
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+.news-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.news-item {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+.news-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+.news-meta {
+    color: #777;
+    font-size: 12px;
+}
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}

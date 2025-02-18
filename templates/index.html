@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noticias RSS Personalizadas</title>
+  <style>
+    /* --- Reset básico --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* --- Estilos base --- */
+    body {
+      background-color: #121212; /* Fondo oscuro */
+      color: #e0e0e0;           /* Texto gris claro */
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 20px auto;
+    }
+    h1 {
+      color: #fff;
+      margin-bottom: 20px;
+      text-align: left;
+      font-weight: normal;
+    }
+    h2{
+      color: #fff;
+      margin-bottom: 20px;
+      text-align: left;
+      font-weight: normal;
+    }
+
+    /* --- Grid de tarjetas --- */
+    .news-grid {
+      display: grid;
+      /* Ajusta la siguiente línea según cuántas columnas quieras en pantallas grandes */
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px; /* Separación entre tarjetas */
+    }
+
+    /* --- Tarjeta individual --- */
+    .news-card {
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* --- Imagen de la noticia --- */
+    .news-card img {
+      width: 100%;
+      height: 180px;       /* Ajusta la altura según tu preferencia */
+      object-fit: cover;   /* Recorta la imagen para llenar el contenedor */
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+
+    /* Muestra una imagen de respaldo si falla la URL */
+    .news-card img[onerror] {
+      content: url('https://via.placeholder.com/400x200/444/fff?text=Sin+imagen');
+    }
+
+    /* --- Título de la noticia --- */
+    .news-title {
+      color: #fff;
+      font-size: 1.1em;
+      font-weight: bold;
+      text-decoration: none;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+    .news-title:hover {
+      color: #03a9f4; /* Efecto hover en el título */
+    }
+
+    /* --- Metadatos (fuente, fecha) --- */
+    .news-meta {
+      color: #999;
+      font-size: 0.9em;
+      margin-bottom: 8px;
+    }
+
+    /* --- Descripción de la noticia --- */
+    .news-description {
+      color: #ccc;
+      font-size: 0.95em;
+      margin-bottom: 8px;
+    }
+
+    /* --- Responsivo para pantallas pequeñas --- */
+    @media (max-width: 600px) {
+      .news-card img {
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Resumen de noticias</h1>
+    <h2>By: NeymorFeed<h2>
+
+    <!-- Contenedor en forma de grid para todas las noticias -->
+    <div class="news-grid">
+      {% for news in news_items %}
+        <div class="news-card">
+          <img 
+            src="{{ news.image_url }}" 
+            alt="Imagen de la noticia" 
+            onerror="this.onerror=null;this.src='https://via.placeholder.com/400x200/444/fff?text=Sin+imagen';"
+          >
+          <a class="news-title" href="{{ news.link }}" target="_blank">
+            {{ news.title }}
+          </a>
+          <p class="news-meta">
+            {{ news.source }} | {{ news.pubDate }}
+          </p>
+          <p class="news-description">
+            {{ news.description | striptags | truncate(150) }}
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+</html>
