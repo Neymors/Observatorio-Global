@@ -1,5 +1,6 @@
 
 from flask import Flask, render_template
+app = Flask(__name__)
 import feedparser
 import re
 from cachetools import cached, TTLCache
