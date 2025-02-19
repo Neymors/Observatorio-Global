@@ -6,7 +6,6 @@ from cachetools import cached, TTLCache
 from functools import lru_cache  # Importa lru_cache
 
 app = Flask(__name__)
-app.run(host="0.0.0.0", port=5000, debug=False)  # No uses debug en producción
 
 # Feeds RSS de ejemplo (puedes agregar o quitar)
 RSS_FEEDS = [
@@ -148,4 +147,4 @@ def home():
     return render_template("index.html", news_items=news_items)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
